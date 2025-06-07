@@ -29,7 +29,9 @@ jobs:
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
+        id: run-tests
         run: npm test
+        if: steps.run-tests.outcome == 'failure' 
       - name: Output information
         run: echo "MONGODB_USERNAME - ${{env.MONGODB_USERNAME}}"
   deploy:
