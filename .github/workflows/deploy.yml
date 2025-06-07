@@ -32,7 +32,7 @@ jobs:
         id: run-tests
         run: npm test
       - name: Output information
-        if: steps.run-tests.outcome == 'failure' 
+        if: success() && steps.run-tests.outcome == 'failure' 
         run: echo "MONGODB_USERNAME - ${{env.MONGODB_USERNAME}}"
   deploy:
     needs: test
